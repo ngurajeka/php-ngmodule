@@ -1,0 +1,20 @@
+{
+    "name": "ng/module",
+    "description": "Base Module",
+    "type": "library",
+    "require": {
+        "php": ">=5.4.x"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ady Rahmat MA",
+            "email": "ngurajeka.92@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "NgModule": "src"
+        }
+    }
+}
