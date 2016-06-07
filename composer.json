@@ -1,5 +1,5 @@
 {
-    "name": "ng/module",
+    "name": "ngurajeka/module",
     "description": "Base Module",
     "type": "library",
     "require": {
