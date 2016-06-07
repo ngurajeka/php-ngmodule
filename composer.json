@@ -3,7 +3,7 @@
     "description": "Base Module",
     "type": "library",
     "require": {
-        "php": ">=5.4.x"
+        "php": ">=5.4.0"
     },
     "license": "MIT",
     "authors": [
