@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "NgModule": "src"
+            "Ng\\Module": "src"
         }
     }
 }

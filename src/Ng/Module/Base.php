@@ -10,7 +10,9 @@
  * @license  MIT https://opensource.org/licenses/MIT
  * @link     https://github.com/ngurajeka/php-ngmodule
  */
-namespace NgModule;
+namespace Ng\Module;
+
+
 /**
  * Base Module
  *
@@ -22,10 +24,34 @@ namespace NgModule;
  */
 class Base
 {
+    protected $code;
     protected $error;
     protected $errors;
     protected $data;
     protected $result;
+
+    /**
+     * Set Error Code
+     *
+     * @param $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * Get Error Code
+     *
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
 
     /**
      * Get Error returning the general error of a process
