@@ -22,7 +22,7 @@ namespace Ng\Module;
  * @license  MIT https://opensource.org/licenses/MIT
  * @link     https://github.com/ngurajeka/php-ngmodule
  */
-class Base
+trait Base
 {
 
     protected $code;
@@ -147,4 +147,5 @@ class Base
         $this->result = $result;
         return $this;
     }
+
 }
