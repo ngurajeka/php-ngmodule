@@ -24,6 +24,7 @@ namespace Ng\Module;
  */
 class Base
 {
+
     protected $code;
     protected $error;
     protected $errors;
