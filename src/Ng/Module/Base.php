@@ -29,7 +29,6 @@ trait Base
     protected $error;
     protected $errors;
     protected $data;
-    protected $result;
 
     /**
      * Set Error Code
@@ -122,29 +121,6 @@ trait Base
     public function setData($data)
     {
         $this->data = $data;
-        return $this;
-    }
-
-    /**
-     * Get Result returning the origin result of a process
-     *
-     * @return mixed
-     */
-    public function getResult()
-    {
-        return $this->result;
-    }
-
-    /**
-     * Set Result the origin result of a process.
-     *
-     * @param mixed $result origin result
-     *
-     * @return $this
-     */
-    public function setResult($result)
-    {
-        $this->result = $result;
         return $this;
     }
 
