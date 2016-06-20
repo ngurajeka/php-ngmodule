@@ -27,6 +27,11 @@ trait Query
 
     protected $query = array();
 
+    private function reset()
+    {
+        $this->query = array();
+    }
+
     private function add($d, $f, $o, $v, $s)
     {
 
@@ -49,7 +54,7 @@ trait Query
         $this->add($d, $f, $o, $v, "OR");
     }
 
-    private function stringify(array $query)
+    private function stringify(array $query=null)
     {
         $q = "";
 
@@ -72,8 +77,16 @@ trait Query
 
             foreach ($opt["conditions"] as $cond) {
 
+                if (is_integer($cond["value"])) {
+                    $v = $cond["value"];
+                } else if (is_array($cond["value"])) {
+                    $v = sprintf("(%s)", join(",", $cond["value"]));
+                } else {
+                    $v = sprintf("'%s'", $cond["value"]);
+                }
+
                 $s = sprintf(
-                    "%s %s %v", $field, getOpr($cond["opr"]), $cond["value"]
+                    "%s %s %s", $field, $this->getOpr($cond["opr"]), $v
                 );
 
                 if (!empty($_q)) {
@@ -119,13 +132,13 @@ trait Query
             $o = ">=";
             break;
         case "in":
-            $o = "in";
+            $o = "IN";
             break;
         case "not":
             $o = "<>";
             break;
         case "notin":
-            $o = "not in";
+            $o = "NOT IN";
             break;
         }
         return $o;
