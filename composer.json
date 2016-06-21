@@ -1,6 +1,7 @@
 {
     "name": "ngurajeka/module",
     "description": "Base Module",
+    "version": "0.0.1",
     "type": "library",
     "require": {
         "php": ">=5.4.0"
