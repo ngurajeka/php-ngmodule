@@ -44,17 +44,17 @@ trait Query
 
     }
 
-    private function addWhere($f, $o, $v, $d)
+    protected function addWhere($f, $o, $v, $d)
     {
         $this->add($d, $f, $o, $v, "AND");
     }
 
-    private function orWhere($f, $o, $v, $d)
+    protected function orWhere($f, $o, $v, $d)
     {
         $this->add($d, $f, $o, $v, "OR");
     }
 
-    private function stringify(array $query=null)
+    protected function stringify(array $query=null)
     {
         $q = "";
 
@@ -144,26 +144,11 @@ trait Query
         return $o;
     }
 
-    private function sample()
+    protected function addOpt(&$opt, $f, $o, $v, $s="AND")
     {
-        $sample = array(
-            "field1" => array(
-                "conditions"    => array(
-                    array("opr" => "equals", "value" => 1),
-                    array("opr" => "equals", "value" => 3, "separator" => "OR"),
-                ),
-            ),
-            "field2" => array(
-                "separator"     => "OR",
-                "conditions"    => array(
-                    array("opr" => "greaterthan", "value" => 1),
-                    array("opr" => "lessthan", "value" => 3, "separator" => "AND"),
-                ),
-            ),
+        $opt[] = array(
+            "field" => $f, "opr" => $o, "value" => $v, "separator" => $s
         );
-
-        /* return "(field1 = 1 OR field1 = 3) OR (field2 > 1 AND field2 < 3)"; */
-        return $this->stringify($sample);
     }
 
     /**
