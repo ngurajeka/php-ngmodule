@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Modules\Constants\Http;
+namespace Ng\Module\Constants\Http;
 
 
 class Header
