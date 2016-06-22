@@ -12,6 +12,9 @@ class Header
 
     const ORIGIN    = "*";
 
-    const APPJSON       = "application/json; charset=UTF-8";
     const CONTENT_TYPE  = "Content-Type";
+    const APPJSON       = "application/json; charset=UTF-8";
+    const JSON          = "application/json";
+
+    const FORMURLENCODED    = "application/x-www-form-urlencoded";
 }
