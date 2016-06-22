@@ -6,6 +6,7 @@ class Errors
 {
     const AVAILABLE         = "Available";
     const EMPTYORINVALID    = "Empty / Invalid";
+    const EXPIRED           = "Expired";
     const INVALID           = "Invalid";
     const NOTFOUND          = "Not Found";
     const WAS               = "Was";
@@ -31,10 +32,19 @@ class Errors
     public static function notAvailable($msg)
     {
         if (!empty($msg) AND is_string($msg)) {
-            return sprintf("%s Not %s", $msg, self::AVAILABLE);
+            return sprintf("%s Is Not %s", $msg, self::AVAILABLE);
         }
 
         return sprintf("Not %s", self::AVAILABLE);
+    }
+
+    public static function expired($msg)
+    {
+        if (!empty($msg) AND is_string($msg)) {
+            return sprintf("%s Has Been %s", $msg, self::EXPIRED);
+        }
+
+        return sprintf("Has Been %s", self::EXPIRED);
     }
 
 }
