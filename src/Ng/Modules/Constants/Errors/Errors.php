@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Modules\Constants\Error;
+namespace Ng\Modules\Constants\Errors;
 
 
 class Errors
