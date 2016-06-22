@@ -1,13 +1,14 @@
 <?php
-namespace Ng\Module\Constants\Error;
+namespace Ng\Modules\Constants\Error;
 
 
-class Error
+class Errors
 {
+    const AVAILABLE         = "Available";
+    const EMPTYORINVALID    = "Empty / Invalid";
+    const INVALID           = "Invalid";
     const NOTFOUND          = "Not Found";
     const WAS               = "Was";
-    const INVALID           = "Invalid";
-    const EMPTYORINVALID    = "Empty / Invalid";
 
     public static function notFound($msg)
     {
@@ -26,4 +27,14 @@ class Error
 
         return self::EMPTYORINVALID;
     }
+
+    public static function notAvailable($msg)
+    {
+        if (!empty($msg) AND is_string($msg)) {
+            return sprintf("%s Not %s", $msg, self::AVAILABLE);
+        }
+
+        return sprintf("Not %s", self::AVAILABLE);
+    }
+
 }

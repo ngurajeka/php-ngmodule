@@ -10,8 +10,10 @@
  * @license  MIT https://opensource.org/licenses/MIT
  * @link     https://github.com/ngurajeka/php-ngmodule
  */
-namespace Ng\Module\Query;
+namespace Ng\Modules\Query;
 
+
+use Ng\Module\Constants\Query\Operator;
 
 /**
  * Query Module
@@ -29,11 +31,21 @@ trait Page
     protected $pageOrder;
     protected $pageSize;
 
+    public function descending($key)
+    {
+        return $this->setPageOrder(sprintf("%s %s", $key, Operator::U_DESC));
+    }
+
+    public function ascending($key)
+    {
+        return $this->setPageOrder(sprintf("%s %s", $key, Operator::U_ASC));
+    }
+
     /**
      * @return mixed
      */
-    public function getPageNumber() {
-
+    public function getPageNumber()
+    {
         return $this->pageNumber;
     }
 
@@ -42,8 +54,8 @@ trait Page
      *
      * @return Page
      */
-    public function setPageNumber($pageNumber) {
-
+    public function setPageNumber($pageNumber)
+    {
         $this->pageNumber = $pageNumber;
         return $this;
     }
@@ -51,8 +63,8 @@ trait Page
     /**
      * @return mixed
      */
-    public function getPageOrder() {
-
+    public function getPageOrder()
+    {
         return $this->pageOrder;
     }
 
@@ -61,8 +73,8 @@ trait Page
      *
      * @return Page
      */
-    public function setPageOrder($pageOrder) {
-
+    public function setPageOrder($pageOrder)
+    {
         $this->pageOrder = $pageOrder;
         return $this;
     }
@@ -70,8 +82,8 @@ trait Page
     /**
      * @return mixed
      */
-    public function getPageSize() {
-
+    public function getPageSize()
+    {
         return $this->pageSize;
     }
 
@@ -80,8 +92,8 @@ trait Page
      *
      * @return Page
      */
-    public function setPageSize($pageSize) {
-
+    public function setPageSize($pageSize)
+    {
         $this->pageSize = $pageSize;
         return $this;
     }

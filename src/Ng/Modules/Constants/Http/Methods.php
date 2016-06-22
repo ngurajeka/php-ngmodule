@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Module\Constants\Http;
+namespace Ng\Modules\Constants\Http;
 
 
 class Methods

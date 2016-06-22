@@ -10,7 +10,7 @@
  * @license  MIT https://opensource.org/licenses/MIT
  * @link     https://github.com/ngurajeka/php-ngmodule
  */
-namespace Ng\Module;
+namespace Ng\Modules;
 
 
 /**
