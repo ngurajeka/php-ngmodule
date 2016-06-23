@@ -27,8 +27,27 @@ trait Base
 
     protected $code;
     protected $error;
-    protected $errors;
+    protected $errors = array();
     protected $data;
+
+    protected function addMsgErrors($msg)
+    {
+        $this->errors[] = array(
+            "message" => $msg,
+        );
+    }
+
+    protected function addError($error)
+    {
+        $this->errors[] = $error;
+    }
+
+    protected function addErrors($errors)
+    {
+        foreach ($errors as $error) {
+            $this->errors[] = $error;
+        }
+    }
 
     /**
      * Set Error Code

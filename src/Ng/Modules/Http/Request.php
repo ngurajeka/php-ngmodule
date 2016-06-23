@@ -13,7 +13,7 @@
 namespace Ng\Modules\Http;
 
 
-use Ng\Module\Constants\Http\Header;
+use Ng\Modules\Constants\Http\Header;
 
 /**
  * Http Request Module

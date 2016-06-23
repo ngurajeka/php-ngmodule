@@ -27,7 +27,7 @@ trait Query
 
     protected $query = array();
 
-    private function reset()
+    protected function reset()
     {
         $this->query = array();
     }

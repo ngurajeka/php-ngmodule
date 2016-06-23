@@ -13,7 +13,7 @@
 namespace Ng\Modules\Query;
 
 
-use Ng\Module\Constants\Query\Operator;
+use Ng\Modules\Constants\Query\Operator;
 
 /**
  * Query Module
