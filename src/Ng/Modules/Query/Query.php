@@ -22,152 +22,118 @@ namespace Ng\Modules\Query;
  * @license  MIT https://opensource.org/licenses/MIT
  * @link     https://github.com/ngurajeka/php-ngmodule
  */
-trait Query
+class Query
 {
 
-    protected $query = array();
 
-    protected function reset()
+    protected $conditions   = array();
+    protected $orders       = array();
+
+    protected $offset       = 0;
+    protected $limit        = 10;
+    protected $pageNumber   = 1;
+
+    public function flush()
     {
-        $this->query = array();
+        $this->conditions   = array();
+        $this->orders       = array();
+        $this->offset       = 0;
+        $this->limit        = 10;
+        $this->pageNumber   = 1;
     }
 
-    private function add($d, $f, $o, $v, $s)
+    public function addCondition(Condition\Condition $condition)
     {
+        $this->conditions[] = $condition;
+    }
 
-        if (!isset($this->query[$f])) {
-            $this->query[$f] = array("separator" => $d, "conditions" => array());
+    public function addOrder(Order\Order $order)
+    {
+        $this->orders[]     = $order;
+    }
+
+    public function hasConditions()
+    {
+        return !empty($this->conditions);
+    }
+
+    public function hasOrders()
+    {
+        return !empty($this->orders);
+    }
+
+    public function getOrder()
+    {
+        $str    = "";
+        if ($this->hasOrders()) {
+            foreach ($this->orders as $order) {
+                /** @type Order\Order $order */
+                $str .= $order->stringify(!empty($str));
+            }
         }
 
-        $q = array("opr" => $o, "value" => $v, "separator" => $s);
-        $this->query[$f]["conditions"][] = $q;
-
+        return !empty($str) ? $str : null;
     }
 
-    protected function addWhere($f, $o, $v, $d)
+    public function stringify()
     {
-        $this->add($d, $f, $o, $v, "AND");
-    }
-
-    protected function orWhere($f, $o, $v, $d)
-    {
-        $this->add($d, $f, $o, $v, "OR");
-    }
-
-    protected function stringify(array $query=null)
-    {
-        $q = "";
-
-        if (empty($query)) {
-
-            if (!is_array($this->query)) {
-                return $q;
+        $str    = "";
+        if ($this->hasConditions()) {
+            foreach ($this->conditions as $condition) {
+                /** @type Condition\Condition $condition */
+                $str .= $condition->stringify(!empty($str));
             }
-
-            if (empty($this->query)) {
-                return $q;
-            }
-
-            $query = $this->query;
         }
 
-        foreach ($query as $field => $opt) {
-
-            $_q = "";
-
-            foreach ($opt["conditions"] as $cond) {
-
-                if (is_integer($cond["value"])) {
-                    $v = $cond["value"];
-                } else if (is_array($cond["value"])) {
-                    $v = sprintf("(%s)", join(",", $cond["value"]));
-                } else {
-                    $v = sprintf("'%s'", $cond["value"]);
-                }
-
-                $s = sprintf(
-                    "%s %s %s", $field, $this->getOpr($cond["opr"]), $v
-                );
-
-                if (!empty($_q)) {
-                    $d  = isset($cond["separator"]) ? $cond["separator"] : "AND";
-                    $_q = sprintf("%s %s %s", $_q, $d, $s);
-                    unset($d);
-                } else {
-                    $_q = $s;
-                }
-
-            }
-
-            if (!empty($q)) {
-                $d  = isset($opt["separator"]) ? $opt["separator"] : "AND";
-                $q  = sprintf("(%s) %s (%s)", $q, $d, $_q);
-                unset($d);
-            } else {
-                $q  = $_q;
-            }
-
-        }
-
-        return $q;
-    }
-
-    private function getOpr($opr)
-    {
-        $o = "=";
-        switch ($opr) {
-        case "equals":
-            $o = "=";
-            break;
-        case "lessthan":
-            $o = "<";
-            break;
-        case "lessthanequals":
-            $o = "<=";
-            break;
-        case "greaterthan":
-            $o = ">";
-            break;
-        case "greaterthanequals":
-            $o = ">=";
-            break;
-        case "in":
-            $o = "IN";
-            break;
-        case "not":
-            $o = "<>";
-            break;
-        case "notin":
-            $o = "NOT IN";
-            break;
-        }
-        return $o;
-    }
-
-    protected function addOpt(&$opt, $f, $o, $v, $s="AND")
-    {
-        $opt[] = array(
-            "field" => $f, "opr" => $o, "value" => $v, "separator" => $s
-        );
+        return !empty($str) ? $str : null;
     }
 
     /**
-     * @return array
+     * @return int
      */
-    public function getQuery() {
-
-        return $this->query;
+    public function getPageNumber()
+    {
+        return $this->pageNumber;
     }
 
     /**
-     * @param array $query
-     *
-     * @return Query
+     * @param int $pageNumber
      */
-    public function setQuery($query) {
+    public function setPageNumber($pageNumber)
+    {
+        $this->pageNumber = $pageNumber;
+    }
 
-        $this->query = $query;
-        return $this;
+    /**
+     * @return int
+     */
+    public function getOffset()
+    {
+        return $this->offset;
+    }
+
+    /**
+     * @param int $offset
+     */
+    public function setOffset($offset)
+    {
+        $this->offset = $offset;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * @param int $limit
+     */
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
     }
 
 }
