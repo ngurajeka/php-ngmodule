@@ -69,13 +69,29 @@ class Error
 
     public function toArray()
     {
-        return array(
-            "code"      => $this->code,
-            "detail"    => $this->detail,
-            "field"     => $this->field,
-            "status"    => $this->status,
-            "source"    => $this->source,
-        );
+        $error = array();
+
+        if (!is_null($this->getCode())) {
+            $error["code"]      = $this->getCode();
+        }
+
+        if (!is_null($this->getDetail())) {
+            $error["detail"]    = $this->getDetail();
+        }
+
+        if (!is_null($this->getStatus())) {
+            $error["status"]    = $this->getStatus();
+        }
+
+        if (!is_null($this->getSource())) {
+            $error["source"]    = $this->getSource();
+        }
+
+        if (!is_null($this->getField())) {
+            $error["field"]     = $this->getField();
+        }
+
+        return $error;
     }
 
     public static function populate($c, $d, $f=null, $st=null, $src=null)

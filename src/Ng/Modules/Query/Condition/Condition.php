@@ -76,7 +76,15 @@ class Condition
 
     public function stringify($separator=false)
     {
-        $str = sprintf("(%s %s '%s')", $this->getField(), $this->getOperator(), $this->getValue());
+        if (is_array($this->getValue())) {
+            $value = sprintf("(%s)", join(",", $this->getValue()));
+        } else if (is_integer($this->getValue())) {
+            $value = $this->getValue();
+        } else {
+            $value = sprintf("'%s'", $this->getValue());
+        }
+
+        $str = sprintf("(%s %s %s)", $this->getField(), $this->getOperator(), $value);
         if ($separator) {
             $str = sprintf("%s %s", $this->getSeparator(), $str);
         }
