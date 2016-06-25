@@ -42,4 +42,9 @@ class Base
         return $this->errors;
     }
 
+    public function flushErrors()
+    {
+        $this->errors->flush();
+    }
+
 }
